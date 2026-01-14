@@ -6,7 +6,7 @@
 /*   By: almanier <almanier@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 16:43:53 by almanier          #+#    #+#             */
-/*   Updated: 2026/01/14 13:36:29 by almanier         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:23:28 by almanier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 char	*ft_strdup(const char *s)
 
 {
-	char *copy;
-	size_t i;
-	size_t size;
+	char	*copy;
+	size_t	i;
+	size_t	size;
 
 	size = 0;
 	while (s[size] != '\0')

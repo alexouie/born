@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almanier <almanier@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 12:27:26 by almanier          #+#    #+#             */
-/*   Updated: 2026/01/14 13:36:23 by almanier         ###   ########.fr       */
+/*   Updated: 2026/01/14 13:58:30 by almanier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,31 @@ static char	*ft_fusion(char *statiic, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*statiic;
+	static char	*statiic[1024];
 	ssize_t		countr;
 	char		*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd < 1024)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (buf == NULL)
 		return (NULL);
 	countr = 1;
-	while (countr > 0 && (statiic == NULL || ft_strchr(statiic, '\n') == NULL))
+	while (countr > 0 && (statiic[fd] == NULL || ft_strchr(statiic[fd],
+				'\n') == NULL))
 	{
 		countr = read(fd, buf, BUFFER_SIZE);
 		if (countr <= 0)
 			break ;
 		buf[countr] = '\0';
-		if (statiic == NULL)
-			statiic = ft_strdup(buf);
+		if (statiic[fd] == NULL)
+			statiic[fd] = ft_strdup(buf);
 		else
-			statiic = ft_fusion(statiic, buf);
+			statiic[fd] = ft_fusion(statiic[fd], buf);
 	}
-	free(buf);
-	line = ft_extract(&statiic);
-	return (line);
+	line = ft_extract(&statiic[fd]);
+	return (free(buf), line);
 }
 
 /*
