@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almanier <almanier@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: almanier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 12:27:26 by almanier          #+#    #+#             */
-/*   Updated: 2026/01/14 13:36:23 by almanier         ###   ########.fr       */
+/*   Updated: 2026/01/15 13:55:16 by almanier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,26 +83,31 @@ char	*get_next_line(int fd)
 }
 
 /*
-int	main(void)
-{
-	int		fd;
-	char	*buf;
+#include <fcntl.h>
+#include <stdio.h>
 
-	fd = 0;
-	buf = 0;
-	fd = open("./file.txt", O_RDONLY);
-	if (fd < 0)
-	{
-		printf("erreur\n");
-		return (1);
-	}
-	buf = get_next_line(fd);
-	while(buf != NULL)
-	{
-		printf("%s", buf);
-		free (buf);
-		buf = get_next_line(fd);
-	}
-	return (0);
+int main(void)
+{
+    int fd;
+    char *buf;
+
+    fd = open("./file.txt", O_RDONLY);
+    if (fd < 0)
+    {
+        printf("erreur\n");
+        return (1);
+    }
+
+    buf = get_next_line(fd);
+    while (buf != NULL)
+    {
+        printf("%s", buf);
+        free(buf);
+        buf = get_next_line(fd);
+    }
+
+    close(fd);
+    return (0);
 }
+
 */

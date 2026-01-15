@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almanier <almanier@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: almanier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 12:27:26 by almanier          #+#    #+#             */
-/*   Updated: 2026/01/14 13:58:30 by almanier         ###   ########.fr       */
+/*   Updated: 2026/01/15 13:54:31 by almanier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ static char	*ft_fusion(char *statiic, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*statiic[1024];
+	static char	*statiic[4096];
 	ssize_t		countr;
 	char		*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd < 1024)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (buf == NULL)
@@ -81,28 +81,32 @@ char	*get_next_line(int fd)
 	line = ft_extract(&statiic[fd]);
 	return (free(buf), line);
 }
-
 /*
-int	main(void)
-{
-	int		fd;
-	char	*buf;
 
-	fd = 0;
-	buf = 0;
-	fd = open("./file.txt", O_RDONLY);
-	if (fd < 0)
-	{
-		printf("erreur\n");
-		return (1);
-	}
-	buf = get_next_line(fd);
-	while(buf != NULL)
-	{
-		printf("%s", buf);
-		free (buf);
-		buf = get_next_line(fd);
-	}
-	return (0);
+#include <fcntl.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int fd;
+    char *buf;
+
+    fd = open("./file.txt", O_RDONLY);
+    if (fd < 0)
+    {
+        printf("erreur\n");
+        return (1);
+    }
+
+    buf = get_next_line(fd);
+    while (buf != NULL)
+    {
+        printf("%s", buf);
+        free(buf);
+        buf = get_next_line(fd);
+    }
+
+    close(fd);
+    return (0);
 }
 */
